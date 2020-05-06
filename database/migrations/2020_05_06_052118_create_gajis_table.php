@@ -15,6 +15,7 @@ class CreateGajisTable extends Migration
     {
         Schema::create('gajis', function (Blueprint $table) {
             $table->id();
+            $table->integer('karyawan_id');
             $table->bigInteger('gaji');
             $table->timestamps();
             $table->softDeletes();

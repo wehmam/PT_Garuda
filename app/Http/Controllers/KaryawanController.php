@@ -14,7 +14,8 @@ class KaryawanController extends Controller
      */
     public function index()
     {
-        //
+        $karyawan = Karyawan::all();
+        return view('pages.karyawan.home',compact('karyawan'));
     }
 
     /**

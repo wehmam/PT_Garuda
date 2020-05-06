@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Gaji extends Model
 {
     use SoftDeletes;
+
+    public function karyawan()
+    {
+        return $this->belongsTo('App\Karyawan');
+    }
 }
