@@ -68,7 +68,8 @@
                         <div class="alert-danger">{{ $message }}</div>
                       @enderror
 
-                      <button type="submit" name="submit" class="btn btn-success">Simpan</button>
+                      <button type="submit" name="submit" class="btn btn-success mt-3 mb-5">Simpan</button>
+                      <a href="{{ route('karyawan.index') }}" class="btn btn-danger float-right mt-3 mb-5">Cancel</a>
                 </form>
             </div>
         </div>
