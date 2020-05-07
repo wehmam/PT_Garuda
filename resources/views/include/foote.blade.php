@@ -17,7 +17,7 @@
                         <h3>Pt Garuda</h3>
                         <p>Pt Terbaik Untuk anda</p>
                         <br><br>
-                        <p>Alamat : Kedung banteng no. 69 </p>
+                        <p>Alamat : Tangerang, Kedung banteng no. 69 </p>
                     </div>
                     
                     <div class="">
