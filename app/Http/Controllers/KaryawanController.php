@@ -25,7 +25,7 @@ class KaryawanController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.karyawan.formCreate');
     }
 
     /**
@@ -36,7 +36,17 @@ class KaryawanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nik' => 'required|unique:karyawans|numeric',
+            'nama' =>'required|string|min:3',
+            'alamat' =>'required',
+            'no_hp' =>'required|max:12',
+            'umur' => 'required|numeric',
+            'jenis_kelamin' => 'required|max:1'
+        ]);
+        Karyawan::create($validatedData);
+        $request->session()->flash('tambah',"Data {$validatedData['nama']} Berhasil Disimpan");
+        return redirect()->route('karyawan.index');
     }
 
     /**
@@ -47,7 +57,8 @@ class KaryawanController extends Controller
      */
     public function show(Karyawan $karyawan)
     {
-        //
+        $karyawan->find($karyawan->id);
+        return view('pages.karyawan.karyawanDetail',compact('karyawan'));
     }
 
     /**
@@ -58,7 +69,8 @@ class KaryawanController extends Controller
      */
     public function edit(Karyawan $karyawan)
     {
-        //
+        $karyawan->find($karyawan->id);
+        return view('pages.karyawan.formEdit',['karyawan'=>$karyawan]);
     }
 
     /**
@@ -70,7 +82,17 @@ class KaryawanController extends Controller
      */
     public function update(Request $request, Karyawan $karyawan)
     {
-        //
+        $validatedData = $request->validate([
+            'nik' => 'required|numeric|unique:karyawans,nik,'. $karyawan->id,
+            'nama' =>'required|string|min:3',
+            'alamat' =>'required',
+            'no_hp' =>'required|max:12',
+            'umur' => 'required|numeric',
+            'jenis_kelamin' => 'required|max:1'
+        ]);
+        $karyawan->find($karyawan->id)->update($validatedData);
+        $request->session()->flash('edit',"Data {$validatedData['nama']} Berhasil Diedit");
+        return redirect()->route('karyawan.index');
     }
 
     /**
@@ -81,6 +103,8 @@ class KaryawanController extends Controller
      */
     public function destroy(Karyawan $karyawan)
     {
-        //
+        $karyawan->find($karyawan->id)->delete();
+        // $karyawan->session()->flash('hapus',"Data {$karyawan['nama']} Berhasil Dihapus");
+        return redirect()->route('karyawan.index')->with(['hapus' => "Data {$karyawan['nama']} Berhasil Dihapus"]);
     }
 }

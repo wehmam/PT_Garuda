@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Karyawan extends Model
 {
+    protected $guarded = [];
     use SoftDeletes;
     public function gaji()
     {
