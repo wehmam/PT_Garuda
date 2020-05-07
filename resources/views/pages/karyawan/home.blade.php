@@ -24,12 +24,12 @@
                     {{ session()->get('hapus') }}
                 </div>
                 @endif
-                <table class="table table-bordered">
+                <table class="table table-hover">
                     <thead>
                       <tr>
                         <th scope="col">Nik</th>
                         <th scope="col">Nama</th>
-                        <th scope="col">Alamat</th>
+                        {{-- <th scope="col">Alamat</th> --}}
                         <th scope="col">No Hp</th>
                         <th scope="col">Umur</th>
                         <th scope="col">Jenis-Kelamin</th>
@@ -41,7 +41,7 @@
                         <tr>
                             <td><a href="{{ route('karyawan.show',$item->id) }}">{{ $item->nik }}</a></td>
                             <td>{{ $item->nama }}</td>
-                            <td>{{ $item->alamat }}</td>
+                            {{-- <td>{{ $item->alamat }}</td> --}}
                             <td>{{ $item->no_hp }}</td>
                             <td>{{ $item->umur }}</td>
                             <td>{{ $item->jenis_kelamin == 'L' ? 'Laki-Laki' : 'Perempuan' }}</td>
