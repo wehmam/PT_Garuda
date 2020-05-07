@@ -8,8 +8,13 @@
     <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
 </head>
 <body>
-   
+    @include('include.header')
+
+
     @yield('content')
+    
+    
+    @include('include.foote')
 
     <script src="{{ asset('bootstrap/jquery-3.4.1.min.js') }}"></script>
     <script src="{{ asset('bootstrap/popper.min.js') }}"></script>
