@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Gaji;
 use Illuminate\Http\Request;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 class GajiController extends Controller
 {
     /**
@@ -14,7 +14,9 @@ class GajiController extends Controller
      */
     public function index()
     {
-        //
+        $gaji = Gaji::all();
+        return view('pages.gaji.index', ['gaji'=> $gaji]);
+        // return "data berhasil di input";
     }
 
     /**
@@ -24,7 +26,7 @@ class GajiController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.gaji.form-gaji');
     }
 
     /**
@@ -35,7 +37,12 @@ class GajiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            "gaji"=>'required',
+        ]);
+        Gaji::create($validatedData);
+        $request->session()->flash("pesan", "Data{$validatedData['gaji']} Berhasil disimpan");
+        return redirect('/gajis');
     }
 
     /**
@@ -46,7 +53,7 @@ class GajiController extends Controller
      */
     public function show(Gaji $gaji)
     {
-        //
+        
     }
 
     /**
@@ -57,7 +64,8 @@ class GajiController extends Controller
      */
     public function edit(Gaji $gaji)
     {
-        //
+        // $gaji = Gaji::find($gaji);
+        return view('pages.gaji.edit', ['gaji'=>$gaji]);
     }
 
     /**
@@ -67,10 +75,15 @@ class GajiController extends Controller
      * @param  \App\Gaji  $gaji
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Gaji $gaji)
-    {
-        //
-    }
+     public function update(Request $request, Gaji $gaji)
+     {
+         $validatedData = $request->validate([
+             'gaji' => 'required',
+         ]);
+         $gaji->find($gaji->id)->update($validatedData);
+         return redirect('/gajis');
+     
+     }
 
     /**
      * Remove the specified resource from storage.
@@ -78,8 +91,9 @@ class GajiController extends Controller
      * @param  \App\Gaji  $gaji
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Gaji $gaji)
+    public function destroy($gaji)
     {
-        //
+        $gaji = Gaji::findorFail($gaji)->delete();
+        return redirect('/gajis');
     }
 }

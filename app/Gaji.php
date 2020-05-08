@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Gaji extends Model
 {
+    protected $guarded = [];
     use SoftDeletes;
 }
